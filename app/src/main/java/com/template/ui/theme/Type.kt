@@ -30,8 +30,8 @@ fun MyTypography() = Typography(
     ),
     h4 = TextStyle(
         fontFamily = robotoMedium,
-        fontSize = 16.sp,
-        color = primaryText
+        fontSize = 18.sp,
+        color = textIcon
     ),
     h5 = TextStyle(
         fontFamily = robotoMedium,

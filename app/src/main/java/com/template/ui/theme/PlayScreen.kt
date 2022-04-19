@@ -27,14 +27,7 @@ fun PlayScreen(
 
     var number by remember { mutableStateOf(0) }
 
-    var isSelected by remember { mutableStateOf(false) }
-
     var openDialog by remember { mutableStateOf(false) }
-
-
-    LaunchedEffect(key1 = Unit) {
-        vm.initState(counter = counter)
-    }
 
     Box(
         modifier = Modifier
@@ -65,29 +58,27 @@ fun PlayScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = state.question,
+                    text = state.question.text,
                     style = MaterialTheme.typography.h2,
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
             Divider(color = MaterialTheme.colors.surface)
-            state.answer.forEach {
+            state.question.answers.forEach {
 
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(44.dp)
                         .clickable {
-                            if (!isSelected) {
-                                vm.selected(it)
-                                isSelected = true
-                                openDialog = true
-                            }
+                            vm.selected(it.id)
+                            openDialog = true
+                            number += 1
                         },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = it,
+                        text = it.title,
                         style = MaterialTheme.typography.h3
                     )
                 }
@@ -96,14 +87,16 @@ fun PlayScreen(
         }
     }
     if (openDialog) {
-        AnswerDialog (
+        AnswerDialog(
             {
-                openDialog = false
-                vm.updateState(number = number++)
-                isSelected = false
+                if (10 - number != counter) {
+                    openDialog = false
+                    vm.updateStep()
+                } else {
+                    navController.navigate("FinishScreen/${state.counterAnswer}/final/${state.step}")
+                }
             },
-            if (state.isSelected) "This is the correct answer"
-        else "This is the wrong answer\n correct answer: ${state.answer[state.correctAnswer]}"
+           state.dialogText
         )
     }
 }
@@ -112,7 +105,7 @@ fun PlayScreen(
 fun AnswerDialog(
     onDismiss: () -> Unit,
     text: String,
-){
+) {
     AlertDialog(
         onDismissRequest = {
             onDismiss()
@@ -130,7 +123,7 @@ fun AnswerDialog(
                     .padding(16.dp)
             ) {
                 Button(
-                    onClick = { onDismiss()},
+                    onClick = { onDismiss() },
                     modifier = Modifier
                         .weight(1f),
                     shape = RoundedCornerShape(8.dp),
