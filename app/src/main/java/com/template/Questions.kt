@@ -84,7 +84,7 @@ object Questions {
                 )
             ),
         )
-    }
+}
 
 data class Answer(
     val id: Int,

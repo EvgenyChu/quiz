@@ -9,8 +9,6 @@ import androidx.compose.ui.unit.sp
 import com.template.R
 
 val robotoMedium = FontFamily(Font(R.font.roboto_medium))
-val robotoRegular = FontFamily(Font(R.font.roboto_regular))
-val robotoLight = FontFamily(Font(R.font.roboto_light))
 
 fun MyTypography() = Typography(
     h1 = TextStyle(
@@ -42,26 +40,5 @@ fun MyTypography() = Typography(
         fontFamily = robotoMedium,
         fontSize = 14.sp,
         color = accentColor
-    ),
-    subtitle1 = TextStyle(
-        fontFamily = robotoRegular,
-        fontSize = 12.sp,
-        color = primaryText
-    ),
-
-    body2 = TextStyle(
-        fontFamily = robotoLight,
-        fontSize = 14.sp,
-        color = primaryText
-    ),
-    caption = TextStyle(
-        fontFamily = robotoLight,
-        fontSize = 13.sp,
-        color = primaryText
-    ),
-    button = TextStyle(
-        fontFamily = robotoMedium,
-        fontSize = 24.sp,
-        color = primaryText
     )
 )

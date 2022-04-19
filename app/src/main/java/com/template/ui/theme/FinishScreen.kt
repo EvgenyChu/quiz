@@ -47,7 +47,7 @@ fun FinishScreen(
             )
             Text(
                 text = "Your score:\nRight answers: $counterAnswer\nWrong answers: " +
-                        "${if (step != null && counterAnswer != null) step-counterAnswer+1 else 0}",
+                        "${if (step != null && counterAnswer != null) step - counterAnswer + 1 else 0}",
                 style = MaterialTheme.typography.h2
             )
 
@@ -63,7 +63,7 @@ fun FinishScreen(
                     .padding(16.dp)
             ) {
                 Button(
-                    onClick = { navController.navigate("StartScreen")},
+                    onClick = { navController.navigate("StartScreen") },
                     modifier = Modifier
                         .height(56.dp)
                         .weight(1f),
@@ -94,7 +94,7 @@ fun FinishScreen(
     }
 
     if (openModeDialog) {
-        ModeDialog (
+        ModeDialog(
             { openModeDialog = false },
             { counter -> navController.navigate("PlayScreen/$counter") }
         )
